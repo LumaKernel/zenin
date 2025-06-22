@@ -1,0 +1,23 @@
+Effect.ts パッケージのピア依存関係に関する注意点:
+
+## 問題
+@effect/platform-node や @effect/sql などのパッケージは、以下のピア依存関係を必要とする：
+- @effect/cluster
+- @effect/experimental
+
+これらは自動的にインストールされないため、手動でインストールする必要がある。
+
+## 解決方法
+```bash
+npm install @effect/cluster @effect/experimental
+```
+
+## 関連エラー
+```
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@effect/cluster' imported from ...
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@effect/experimental' imported from ...
+```
+
+## 根本原因
+Effect.tsのエコシステムでは、オプショナルな機能を提供するパッケージがピア依存関係として定義されているが、
+npm workspacesを使用している場合、これらが自動的に解決されないことがある。

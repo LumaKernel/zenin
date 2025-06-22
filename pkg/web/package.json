@@ -10,7 +10,7 @@
     "directory": "pkg/web"
   },
   "scripts": {
-    "dev": "next dev --turbopack --port 5928",
+    "dev": "next dev --port 5928",
     "build": "next build",
     "start": "next start --port 5928",
     "lint": "next lint",

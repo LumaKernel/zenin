@@ -1,0 +1,36 @@
+Next.js Turbopack と npm workspaces の互換性問題:
+
+## 問題
+Next.js 15.3.4のTurbopackがnpm workspaces環境で「Next.js package not found」エラーを出す
+
+## エラーメッセージ
+```
+[TurbopackInternalError]: Next.js package not found
+```
+
+## 解決方法
+1. Turbopackを無効化する
+   ```json
+   // package.json
+   "scripts": {
+     "dev": "next dev --port 5928"  // --turbopackを削除
+   }
+   ```
+
+2. workspace指定をパッケージ名で行う
+   ```json
+   // root package.json
+   "scripts": {
+     "dev-web": "npm run dev --workspace=@template/web"
+   }
+   ```
+
+## 根本原因
+TurbopackのNode.jsパッケージ解決ロジックがnpm workspacesのsymlinkに対応していない
+
+## 代替手段
+- Webpackベースの従来のNext.js dev server使用
+- 十分な速度で動作するため実用上問題なし
+
+## 将来の対応
+Turbopackの修正を待って再導入を検討

@@ -1,0 +1,22 @@
+npm run dev-webエラー解決の完了報告と対策:
+
+## 問題の原因
+1. TurbopackがNext.jsパッケージを見つけられない（npm workspaces環境での互換性問題）
+2. dev-webスクリプトのworkspace指定が不正確（`pkg/web`ではなく`@template/web`を使用すべき）
+
+## 解決策
+1. **Turbopackを無効化**: `next dev --turbopack`から`next dev`に変更
+2. **workspaceスクリプト修正**: パッケージ名での指定に変更
+   - `--workspace=pkg/web` → `--workspace=@template/web`
+   - `--workspace=pkg/server` → `--workspace=@template/server`
+
+## 結果
+✅ `npm run dev-web`が正常に動作（ポート5928）
+✅ `npm run dev-server`も正常動作（ポート5929）
+
+## 注意事項
+- Turbopackは現在のnpm workspaces構成では不安定
+- 将来的にTurbopackのworkspace対応が改善された際は再導入を検討
+
+## 外部ドキュメント更新
+Next.jsのworkspace問題についてexternal-docsに記録済み
