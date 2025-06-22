@@ -1,1 +1,1 @@
-Effect.ts: effect-ts/llms-full.txt
+- Effect.ts: effect-ts/llms-full.txt

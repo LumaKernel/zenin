@@ -1,0 +1,48 @@
+{
+  "name": "the-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@effect/platform": "^0.85.2",
+    "@effect/rpc": "^0.62.4",
+    "@effect/rpc-http": "^0.52.4",
+    "@mantine/carousel": "^8.1.1",
+    "@mantine/charts": "^8.1.1",
+    "@mantine/code-highlight": "^8.1.1",
+    "@mantine/core": "^8.1.1",
+    "@mantine/dates": "^8.1.1",
+    "@mantine/dropzone": "^8.1.1",
+    "@mantine/form": "^8.1.1",
+    "@mantine/hooks": "^8.1.1",
+    "@mantine/modals": "^8.1.1",
+    "@mantine/notifications": "^8.1.1",
+    "@mantine/nprogress": "^8.1.1",
+    "@mantine/spotlight": "^8.1.1",
+    "@mantine/tiptap": "^8.1.1",
+    "@mantine/vanilla-extract": "^8.1.1",
+    "@tabler/icons-react": "^3.34.0",
+    "@tanstack/react-form": "^1.12.3",
+    "@tanstack/react-query": "^5.81.2",
+    "@tanstack/react-query-devtools": "^5.81.2",
+    "effect": "^3.16.8",
+    "next": "15.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "undici": "^7.10.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "typescript": "^5"
+  }
+}

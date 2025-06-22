@@ -10,10 +10,10 @@
   ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
-    "codegen": "npm run codegen --workspaces --if-present",
-    "build": "tsc -b tsconfig.build.json && npm run build --workspaces --if-present",
+    "codegen": "npm run codegen -- --workspaces --if-present",
+    "build": "tsc -b tsconfig.build.json && npm run build --  --workspaces --if-present",
     "check": "tsc -b tsconfig.json",
-    "check-recursive": "npm run check --workspaces --if-present",
+    "check-recursive": "npm run check -- --workspaces --if-present",
     "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
     "lint-fix": "npm run lint -- --fix",
     "test": "vitest",

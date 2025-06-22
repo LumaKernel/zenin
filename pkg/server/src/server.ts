@@ -8,7 +8,7 @@ import { TodosRepository } from "./TodosRepository.js"
 const HttpLive = HttpApiBuilder.serve(HttpMiddleware.logger).pipe(
   Layer.provide(ApiLive),
   Layer.provide(TodosRepository.Default),
-  Layer.provide(NodeHttpServer.layer(createServer, { port: 3000 }))
+  Layer.provide(NodeHttpServer.layer(createServer, { port: 3005 }))
 )
 
 Layer.launch(HttpLive).pipe(
