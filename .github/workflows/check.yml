@@ -1,4 +1,4 @@
-name: Check
+name: チェック
 on:
   workflow_dispatch:
   pull_request:
@@ -14,45 +14,45 @@ permissions: {}
 
 jobs:
   build:
-    name: Build
+    name: ビルド
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm codegen
+      - run: npm run codegen
       - name: Check source state
         run: git add packages/*/src && git diff-index --cached HEAD --exit-code packages/*/src
 
   types:
-    name: Types
+    name: 型チェック
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm check
+      - run: npm run check
 
   lint:
-    name: Lint
+    name: リント
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm lint
+      - run: npm run lint
 
   test:
-    name: Test 
+    name: テスト
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         uses: ./.github/actions/setup
-      - run: pnpm vitest 
+      - run: npm run test 
         env:
           NODE_OPTIONS: --max_old_space_size=8192

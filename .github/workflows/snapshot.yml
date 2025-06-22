@@ -1,4 +1,4 @@
-name: Snapshot
+name: スナップショット
 on:
   pull_request:
     branches: [main]
@@ -8,7 +8,7 @@ permissions: {}
 
 jobs:
   snapshot:
-    name: Snapshot
+    name: スナップショット
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/setup
       - name: Build package
-        run: pnpm build
+        run: npm run build
       - name: Create snapshot
         id: snapshot
-        run: pnpx pkg-pr-new@0.0.24 publish --pnpm --comment=off ./packages/*
+        run: npx pkg-pr-new@0.0.24 publish --comment=off ./packages/*

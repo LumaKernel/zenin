@@ -1,4 +1,5 @@
 {
+  "name": "zenin",
   "private": true,
   "type": "module",
   "engines": {
@@ -10,10 +11,10 @@
   ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
-    "codegen": "npm run codegen -- --workspaces --if-present",
-    "build": "tsc -b tsconfig.build.json && npm run build --  --workspaces --if-present",
+    "codegen": "npm run codegen --workspace=@template/cli --workspace=@template/domain --workspace=@template/server",
+    "build": "tsc -b tsconfig.build.json && npm run build --workspaces",
     "check": "tsc -b tsconfig.json",
-    "check-recursive": "npm run check -- --workspaces --if-present",
+    "check-recursive": "npm run check --workspaces",
     "lint": "npm run _lint:eslint && npm run _lint:prettier",
     "_lint:eslint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
     "_lint:prettier": "prettier . --list-different",
