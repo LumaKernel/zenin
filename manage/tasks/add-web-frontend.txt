@@ -1,0 +1,11 @@
+Webフロントエンドをセットアップせよ。以下を利用し、要求を満たせ(当然ながら、最新版)
+- Next.js
+  - the-next-app というディレクトリで空のセットアップをしておいたので、こちらも参照せよ
+- Mantine https://mantine.dev/
+- Effect/rpcを利用したサーバーへのアクセスを前提とする
+  - 環境変数で接続先を切り替えられる
+  - .env.* を利用してローカルでは簡単に開発を開始できる
+  - packages/cliはCLIクライアントなので、方法はこちらも参照せよ
+- @tanstack/react-query
+- @tanstack/form
+- ダークモードに対応 (system/light/darkを選べて、localStorageで記憶)
