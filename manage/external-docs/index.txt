@@ -1,0 +1,2 @@
+Effect.ts:
+- @./effect-ts/llms-full.txt

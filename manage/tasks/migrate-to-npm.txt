@@ -1,0 +1,4 @@
+pnpmからnpmに移行せよ。
+npm workspaceを利用し、各種スクリプトが動く状態にせよ。
+.npmrc に engine-strict を指定し、node 24以上、npm 10 以上を前提とせよ。
+packages/は長いので、pkg/にせよ。
