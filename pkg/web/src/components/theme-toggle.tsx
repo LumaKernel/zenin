@@ -1,11 +1,10 @@
 "use client";
 
-import { ActionIcon, Menu, Text } from "@mantine/core";
+import { ActionIcon, Menu, Text, useMantineColorScheme } from "@mantine/core";
 import { IconMoon, IconSun, IconDeviceDesktop } from "@tabler/icons-react";
-import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
-  const { colorScheme, setColorScheme } = useTheme();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   return (
     <Menu shadow="md" width={200}>

@@ -1,12 +1,6 @@
-"use client";
-
 import "@mantine/core/styles.css";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ThemeProvider } from "../components/theme-provider";
-
-const queryClient = new QueryClient();
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import { QueryProvider } from "../components/query-provider";
 
 export default function RootLayout({
   children,
@@ -14,19 +8,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
       </head>
       <body>
-        <QueryClientProvider client={queryClient}>
+        <QueryProvider>
           <MantineProvider>
-            <ThemeProvider>
-              {children}
-              <ReactQueryDevtools initialIsOpen={false} />
-            </ThemeProvider>
+            {children}
           </MantineProvider>
-        </QueryClientProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -1,0 +1,44 @@
+Mantine公式ドキュメント: Next.js hydrationエラー解決方法
+
+URL: https://mantine.dev/guides/next/
+
+## 推奨セットアップ (App Router)
+
+```tsx
+// app/layout.tsx
+import '@mantine/core/styles.css';
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body>
+        <MantineProvider>{children}</MantineProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+## 重要なポイント
+
+1. `ColorSchemeScript`をheadに配置: サーバーサイドでカラースキームを初期化
+2. `mantineHtmlProps`をhtmlタグに適用: SSR時の属性設定
+3. 独自のtheme providerは不要: Mantineが提供する機能で十分
+
+## hydrationエラーの原因
+
+- サーバーサイドとクライアントサイドでのカラースキーム状態の不一致
+- localStorageアクセスによるSSR/CSR間の差異
+- 独自のuseEffectによる初期化タイミングの問題
+
+## 解決策
+
+Mantine公式の`ColorSchemeScript`を使用することで、サーバーサイドでも適切にカラースキームが設定され、hydrationエラーが解消される。

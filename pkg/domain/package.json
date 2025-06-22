@@ -4,6 +4,11 @@
   "type": "module",
   "license": "MIT",
   "description": "The domain template",
+  "repository": {
+    "type": "git",
+    "url": "<PLACEHOLDER>",
+    "directory": "pkg/domain"
+  },
   "publishConfig": {
     "access": "public",
     "directory": "dist"

@@ -1,0 +1,32 @@
+
+cilent queryを渡す領域は use client として分離した場所でやるのがよい
+layout.txt自体は use client にせず実現せよ。
+
+===
+
+
+> dev-web
+> npm run dev --workspace=@template/web
+
+
+> @template/web@0.0.0 dev
+> next dev --port 5928
+
+   ▲ Next.js 15.3.4
+   - Local:        http://localhost:5928
+   - Network:      http://192.168.11.12:5928
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1306ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.9s (3026 modules)
+ ⨯ Error: Only plain objects, and a few built-ins, can be passed to Client Components from Server Components. Classes or null prototypes are not supported.
+  <... client={{}} children={{...}}>
+              ^^^^
+    at stringify (<anonymous>)
+    at stringify (<anonymous>) {
+  digest: '2149421619'
+}
+ GET / 500 in 3415ms
+

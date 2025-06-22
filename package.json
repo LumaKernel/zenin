@@ -14,8 +14,8 @@
     "build": "tsc -b tsconfig.build.json && npm run build --  --workspaces --if-present",
     "check": "tsc -b tsconfig.json",
     "check-recursive": "npm run check -- --workspaces --if-present",
-    "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
-    "lint-fix": "npm run lint -- --fix",
+    "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\" && prettier . --list-differences",
+    "lint-fix": "npm run lint -- --fix && prettier . --write",
     "test": "vitest",
     "coverage": "vitest --coverage",
     "dev-web": "npm run dev --workspace=@template/web",
@@ -45,6 +45,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
     "glob": "^11.0.0",
+    "prettier": "^3.5.3",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vitest": "^3.0.0"

@@ -13,7 +13,6 @@
     "dev": "next dev --port 5928",
     "build": "next build",
     "start": "next start --port 5928",
-    "lint": "next lint",
     "check": "tsc --noEmit"
   },
   "dependencies": {

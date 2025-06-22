@@ -2,8 +2,12 @@
 
 import { AppShell, Burger, Group, Title, Container, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { ThemeToggle } from "../components/theme-toggle";
+import dynamic from "next/dynamic";
 import { TodoList } from "../components/todo-list";
+
+const ThemeToggle = dynamic(() => import("../components/theme-toggle").then(mod => ({ default: mod.ThemeToggle })), {
+  ssr: false,
+});
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
