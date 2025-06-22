@@ -1,27 +1,30 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Effect, Runtime } from "effect";
 
-export function useAsyncQuery<T>(
+const runtime = Runtime.defaultRuntime;
+
+export function useEffectQuery<E, A>(
   key: readonly string[],
-  queryFn: () => Promise<T>
+  effect: Effect.Effect<A, E>
 ) {
   return useQuery({
     queryKey: key,
-    queryFn,
+    queryFn: () => Runtime.runPromise(runtime)(effect),
   });
 }
 
-export function useAsyncMutation<Args, T>(
-  mutationFn: (args: Args) => Promise<T>,
+export function useEffectMutation<Args, E, A>(
+  effectFn: (args: Args) => Effect.Effect<A, E>,
   options?: {
-    onSuccess?: (data: T) => void;
-    onError?: (error: Error) => void;
+    onSuccess?: (data: A) => void;
+    onError?: (error: E) => void;
     invalidateQueries?: readonly string[][];
   }
 ) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn,
+    mutationFn: (args: Args) => Runtime.runPromise(runtime)(effectFn(args)),
     onSuccess: (data) => {
       options?.onSuccess?.(data);
       options?.invalidateQueries?.forEach((queryKey) => {

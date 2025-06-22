@@ -14,7 +14,8 @@
     "build": "tsc -b tsconfig.build.json",
     "check": "tsc -b tsconfig.json",
     "test": "vitest",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "dev": "tsx --watch src/server.ts"
   },
   "dependencies": {
     "@effect/platform": "latest",

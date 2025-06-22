@@ -1,17 +1,22 @@
 {
-  "name": "the-next-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@template/web",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "The web frontend template",
+  "repository": {
+    "type": "git",
+    "url": "<PLACEHOLDER>",
+    "directory": "pkg/web"
+  },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack --port 5928",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start --port 5928",
+    "lint": "next lint",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@effect/platform": "^0.85.2",
-    "@effect/rpc": "^0.62.4",
-    "@effect/rpc-http": "^0.52.4",
     "@mantine/carousel": "^8.1.1",
     "@mantine/charts": "^8.1.1",
     "@mantine/code-highlight": "^8.1.1",
@@ -30,7 +35,7 @@
     "@tanstack/react-form": "^1.12.3",
     "@tanstack/react-query": "^5.81.2",
     "@tanstack/react-query-devtools": "^5.81.2",
-    "effect": "^3.16.8",
+    "effect": "latest",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

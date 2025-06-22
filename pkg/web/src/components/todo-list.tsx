@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import { IconTrash, IconPlus, IconAlertCircle } from "@tabler/icons-react";
 import { useState } from "react";
-import { useAsyncQuery, useAsyncMutation } from "../hooks/use-effect-query";
+import { useEffectQuery, useEffectMutation } from "../hooks/use-effect-query";
 import { todosApi } from "../lib/api-client";
 import { Todo, TodoId } from "@domain/TodosApi";
 
@@ -25,9 +25,9 @@ export function TodoList() {
     data: todos,
     isLoading,
     error,
-  } = useAsyncQuery(["todos"], todosApi.getAllTodos);
+  } = useEffectQuery(["todos"], todosApi.getAllTodos());
 
-  const createTodoMutation = useAsyncMutation(
+  const createTodoMutation = useEffectMutation(
     (text: string) => todosApi.createTodo(text),
     {
       onSuccess: () => {
@@ -37,14 +37,14 @@ export function TodoList() {
     }
   );
 
-  const completeTodoMutation = useAsyncMutation(
+  const completeTodoMutation = useEffectMutation(
     (id: TodoId) => todosApi.completeTodo(id),
     {
       invalidateQueries: [["todos"]],
     }
   );
 
-  const removeTodoMutation = useAsyncMutation(
+  const removeTodoMutation = useEffectMutation(
     (id: TodoId) => todosApi.removeTodo(id),
     {
       invalidateQueries: [["todos"]],

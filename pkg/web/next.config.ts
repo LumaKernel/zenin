@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@domain": path.resolve(__dirname, "../pkg/domain/src"),
+      "@domain": path.resolve(__dirname, "../domain/src"),
     };
     return config;
   },

@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=24",
+    "node": ">=22",
     "npm": ">=10"
   },
   "workspaces": [
@@ -17,7 +17,9 @@
     "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
     "lint-fix": "npm run lint -- --fix",
     "test": "vitest",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "dev-web": "npm run dev --workspace=pkg/web",
+    "dev-server": "npm run dev --workspace=pkg/server"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
