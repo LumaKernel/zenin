@@ -5,7 +5,7 @@ const runtime = Runtime.defaultRuntime;
 
 export function useEffectQuery<E, A>(
   key: readonly string[],
-  effect: Effect.Effect<A, E>
+  effect: Effect.Effect<A, E>,
 ) {
   return useQuery({
     queryKey: key,
@@ -18,8 +18,8 @@ export function useEffectMutation<Args, E, A>(
   options?: {
     onSuccess?: (data: A) => void;
     onError?: (error: E) => void;
-    invalidateQueries?: readonly string[][];
-  }
+    invalidateQueries?: readonly (readonly string[])[];
+  },
 ) {
   const queryClient = useQueryClient();
 

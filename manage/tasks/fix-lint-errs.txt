@@ -1,1 +1,6 @@
 npm run typecheck, npm run lint-fix のエラーを修正せよ。
+ただし、 no-floating-promises に関しては、以下のルールを再掲しておく。
+
+- Promiseを握り潰さない。 .catchもなるべく利用しない。
+  - webならuseMutationを検討せよ。loadingのステートの明示的なハンドリングをせよ。
+  - それでも難しければ `consumerPromise(Promise<T>)` のような関数をutil等として作成し、.catch+console.warnなどで処理せよ

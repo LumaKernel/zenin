@@ -1,6 +1,8 @@
+// @ts-check
 import { fixupPluginRules } from "@eslint/compat";
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 import codegen from "eslint-plugin-codegen";
 import _import from "eslint-plugin-import";
@@ -13,20 +15,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
 });
 
-export default [
+export default tseslint.config(
   {
-    ignores: ["**/dist", "**/build", "**/docs", "**/*.md", "manage"],
+    ignores: [
+      "**/dist",
+      "**/build",
+      "**/docs",
+      "**/*.md",
+      "manage",
+      "**/.next",
+    ],
   },
-  ...compat.extends(
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@effect/recommended",
-  ),
+  js.configs.recommended,
+  tseslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  tseslint.configs.strict,
+  tseslint.configs.strictTypeChecked,
+  ...compat.extends("plugin:@effect/recommended"),
   {
     plugins: {
       import: fixupPluginRules(_import),
@@ -83,7 +90,7 @@ export default [
       "deprecation/deprecation": "off",
 
       "@typescript-eslint/array-type": [
-        "warn",
+        "error",
         {
           default: "generic",
           readonly: "generic",
@@ -93,9 +100,22 @@ export default [
       "@typescript-eslint/member-delimiter-style": 0,
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-empty-interface": "off",
-      "@typescript-eslint/consistent-type-imports": "warn",
+
+      "@typescript-eslint/no-floating-promises": [
+        "error",
+        {
+          ignoreVoid: false,
+        },
+      ],
+
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          fixStyle: "inline-type-imports",
+          prefer: "no-type-imports",
+        },
+      ],
 
       "@typescript-eslint/no-unused-vars": [
         "error",
@@ -105,7 +125,6 @@ export default [
         },
       ],
 
-      "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/camelcase": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -113,6 +132,18 @@ export default [
       "@typescript-eslint/no-array-constructor": "off",
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
+      "@typescript-eslint/no-misused-spread": "off",
+
+      "@effect/dprint": "off",
     },
   },
-];
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+);

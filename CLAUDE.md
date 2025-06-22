@@ -17,13 +17,16 @@
 - eslint ignoreをなるべく利用しない。どうしても必要ならかならず `/* eslint-ignore-next-line @foo/bar -- ... */` のように必ず理由をコメントで書くこと。
   - なるべくファイル単位のignoreを利用し、かつそのファイルを小さく分離してignoreする領域を小さくすること。
   - ignoreやanyを利用する対象は必ず `_unsafe_/` というのが間に入るようなディレクトリ配下に入れること。
+- Promiseを握り潰さない。 .catchもなるべく利用しない。
+  - webならuseMutationを検討せよ。loadingのステートの明示的なハンドリングをせよ。
+  - それでも難しければ `consumerPromise(Promise<T>)` のような関数をutil等として作成し、.catch+console.warnなどで処理せよ
 
 # TypeScript
 
 - Effect.tsのベストプラクティスに則り開発せよ
 - 関数型の手法を全面的に利用
 - 参照等価性、テスタビリティ、構造化、レイヤリングを意識
-- イミュータブルな方法を取る。readonlyを付ける
+- イミュータブルな方法を取る。`readonly`を付ける。`ReadonlyArray<...>`を利用する。
   - effectの`Data.struct`や`Schema`なども活用
 - interfaceを利用しない。type objectを利用
 - asをとにかく利用しない。
