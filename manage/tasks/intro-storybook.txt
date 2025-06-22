@@ -1,0 +1,2 @@
+pkg/webにstorybookを導入せよ。
+storybookによるテストとカバレッジ計測を行えるようにせよ。

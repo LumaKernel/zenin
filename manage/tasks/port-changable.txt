@@ -1,0 +1,2 @@
+各種利用ポートは ZENIN_API_PORT, ZENIN_WEB_PORT で変更できるようにせよ。また、.env.localでも制御できるようにせよ。
+まずは無しでやってみて、必要であればdotenvxの利用を検討せよ。利用する場合は、まずは関連したドキュメントをexternal-docs/dotenvxに集めよ。

@@ -1,0 +1,2 @@
+turborepoの導入を検討せよ。
+まずは、関連したドキュメントをexternal-docsに集めよ。
