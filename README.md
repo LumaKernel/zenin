@@ -1,32 +1,25 @@
-# Effect Monorepo Template
+# zenin
 
-This template provides a solid foundation for building scalable and maintainable TypeScript applications with Effect. 
+## 概要
 
-## Running Code
+zeninは、ZEN大学の学生向けに開発された統合プラットフォームです。以下の機能を提供します：
 
-This template leverages [tsx](https://tsx.is) to allow execution of TypeScript files via NodeJS as if they were written in plain JavaScript.
+- プロフィール登録・交換
+- スケジュール管理
+- イベント管理
+- 提案システム
 
-To execute a file with `tsx`:
+プロジェクト名の「zenin」は「全員」と「ZEN In」をかけた造語です。
 
-```sh
-pnpm tsx ./path/to/the/file.ts
-```
+## 開発への参加
 
-## Operations
+開発に参加したい方は、[CONTRIBUTING.md](./CONTRIBUTING.md)をご確認ください。ガイドラインに準拠いただける方であれば、どなたでも歓迎いたします。
 
-**Building**
+## 免責事項
 
-To build all packages in the monorepo:
+- 本システムの利用に際して生じた損害について、開発者は一切の責任を負いません
+- 本プロジェクトはZEN大学の公式プロジェクトではなく、大学とは一切関係ありません
 
-```sh
-pnpm build
-```
+## ライセンス
 
-**Testing**
-
-To test all packages in the monorepo:
-
-```sh
-pnpm test
-```
-
+[ライセンスファイル](./LICENSE)を参照してください。
