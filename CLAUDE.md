@@ -21,6 +21,10 @@
   - webならuseMutationを検討せよ。loadingのステートの明示的なハンドリングをせよ。
   - それでも難しければ `consumerPromise(Promise<T>)` のような関数をutil等として作成し、.catch+console.warnなどで処理せよ
 
+# Web
+
+- 新しい実装をしたら必ず、Storybookの追加を検討せよ。
+
 # TypeScript
 
 - Effect.tsのベストプラクティスに則り開発せよ
