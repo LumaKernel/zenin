@@ -31,5 +31,10 @@
         "**/*.ts"
       ]
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "<PLACEHOLDER>",
+    "directory": "pkg/domain"
   }
 }
