@@ -29,16 +29,22 @@ export class TodosClient extends Effect.Service<TodosClient>()(
             Effect.logInfo("Marked todo completed: ", todo),
           ),
           Effect.catchTag("TodoNotFound", () =>
-            Effect.logError(`Failed to find todo with id: ${id}`),
+            Effect.logError(
+              `Failed to find todo with id: ${id satisfies number}`,
+            ),
           ),
         );
       }
 
       function remove(id: TodoId) {
         return client.todos.removeTodo({ path: { id } }).pipe(
-          Effect.flatMap(() => Effect.logInfo(`Deleted todo with id: ${id}`)),
+          Effect.flatMap(() =>
+            Effect.logInfo(`Deleted todo with id: ${id satisfies number}`),
+          ),
           Effect.catchTag("TodoNotFound", () =>
-            Effect.logError(`Failed to find todo with id: ${id}`),
+            Effect.logError(
+              `Failed to find todo with id: ${id satisfies number}`,
+            ),
           ),
         );
       }

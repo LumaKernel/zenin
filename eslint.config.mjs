@@ -6,6 +6,7 @@ import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 import codegen from "eslint-plugin-codegen";
 import _import from "eslint-plugin-import";
+import lumaTs from "@luma-dev/eslint-plugin-luma-ts";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sortDestructureKeys from "eslint-plugin-sort-destructure-keys";
 import path from "node:path";
@@ -34,10 +35,10 @@ export default tseslint.config(
   tseslint.configs.recommendedTypeChecked,
   tseslint.configs.strict,
   tseslint.configs.strictTypeChecked,
-  ...compat.extends("plugin:@effect/recommended"),
   {
     plugins: {
       import: fixupPluginRules(_import),
+      "luma-ts": lumaTs,
       "sort-destructure-keys": sortDestructureKeys,
       "simple-import-sort": simpleImportSort,
       codegen,
@@ -137,6 +138,8 @@ export default tseslint.config(
       "@typescript-eslint/no-misused-spread": "off",
 
       "@effect/dprint": "off",
+
+      "luma-ts/require-satisfies-in-tls": "error",
     },
   },
   {

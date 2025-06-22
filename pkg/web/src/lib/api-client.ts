@@ -11,16 +11,21 @@ class ApiError extends Data.TaggedError("ApiError")<{
 const apiCall = <T>(endpoint: string, options: RequestInit = {}) =>
   Effect.tryPromise({
     try: async () => {
-      const response = await fetch(`${baseUrl}${endpoint}`, {
-        headers: {
-          "Content-Type": "application/json",
-          ...options.headers,
+      const response = await fetch(
+        `${baseUrl satisfies string}${endpoint satisfies string}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            ...options.headers,
+          },
+          ...options,
         },
-        ...options,
-      });
+      );
 
       if (!response.ok) {
-        throw new Error(`API call failed: ${response.statusText}`);
+        throw new Error(
+          `API call failed: ${response.statusText satisfies string}`,
+        );
       }
 
       if (endpoint.includes("DELETE")) {
@@ -38,7 +43,7 @@ const apiCall = <T>(endpoint: string, options: RequestInit = {}) =>
 export const todosApi = {
   getAllTodos: () => apiCall<ReadonlyArray<Todo>>("/todos"),
 
-  getTodoById: (id: TodoId) => apiCall<Todo>(`/todos/${id}`),
+  getTodoById: (id: TodoId) => apiCall<Todo>(`/todos/${id satisfies number}`),
 
   createTodo: (text: string) =>
     apiCall<Todo>("/todos", {
@@ -47,12 +52,12 @@ export const todosApi = {
     }),
 
   completeTodo: (id: TodoId) =>
-    apiCall<Todo>(`/todos/${id}`, {
+    apiCall<Todo>(`/todos/${id satisfies number}`, {
       method: "PATCH",
     }),
 
   removeTodo: (id: TodoId) =>
-    apiCall<undefined>(`/todos/${id}`, {
+    apiCall<undefined>(`/todos/${id satisfies number}`, {
       method: "DELETE",
     }),
 };
