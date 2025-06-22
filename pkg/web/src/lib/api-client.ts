@@ -29,17 +29,16 @@ const apiCall = <T>(endpoint: string, options: RequestInit = {}) =>
 
       return response.json() as T;
     },
-    catch: (error) => new ApiError({ 
-      message: error instanceof Error ? error.message : "Unknown error" 
-    }),
+    catch: (error) =>
+      new ApiError({
+        message: error instanceof Error ? error.message : "Unknown error",
+      }),
   });
 
 export const todosApi = {
-  getAllTodos: () =>
-    apiCall<readonly Todo[]>("/todos"),
+  getAllTodos: () => apiCall<ReadonlyArray<Todo>>("/todos"),
 
-  getTodoById: (id: TodoId) =>
-    apiCall<Todo>(`/todos/${id}`),
+  getTodoById: (id: TodoId) => apiCall<Todo>(`/todos/${id}`),
 
   createTodo: (text: string) =>
     apiCall<Todo>("/todos", {
@@ -53,7 +52,7 @@ export const todosApi = {
     }),
 
   removeTodo: (id: TodoId) =>
-    apiCall<void>(`/todos/${id}`, {
+    apiCall<undefined>(`/todos/${id}`, {
       method: "DELETE",
     }),
 };

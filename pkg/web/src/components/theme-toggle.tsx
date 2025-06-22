@@ -22,23 +22,23 @@ export function ThemeToggle() {
 
       <Menu.Dropdown>
         <Menu.Label>テーマを選択</Menu.Label>
-        
-        <Menu.Item 
-          leftSection={<IconSun size={14} />} 
+
+        <Menu.Item
+          leftSection={<IconSun size={14} />}
           onClick={() => setColorScheme("light")}
         >
           <Text size="sm">ライト</Text>
         </Menu.Item>
-        
-        <Menu.Item 
-          leftSection={<IconMoon size={14} />} 
+
+        <Menu.Item
+          leftSection={<IconMoon size={14} />}
           onClick={() => setColorScheme("dark")}
         >
           <Text size="sm">ダーク</Text>
         </Menu.Item>
-        
-        <Menu.Item 
-          leftSection={<IconDeviceDesktop size={14} />} 
+
+        <Menu.Item
+          leftSection={<IconDeviceDesktop size={14} />}
           onClick={() => setColorScheme("auto")}
         >
           <Text size="sm">システム</Text>

@@ -1,10 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Effect, Runtime } from "effect";
+import { consumerPromise } from "../lib/utils";
 
 const runtime = Runtime.defaultRuntime;
 
 export function useEffectQuery<E, A>(
-  key: readonly string[],
+  key: ReadonlyArray<string>,
   effect: Effect.Effect<A, E>,
 ) {
   return useQuery({
@@ -18,7 +19,7 @@ export function useEffectMutation<Args, E, A>(
   options?: {
     onSuccess?: (data: A) => void;
     onError?: (error: E) => void;
-    invalidateQueries?: readonly (readonly string[])[];
+    invalidateQueries?: ReadonlyArray<ReadonlyArray<string>>;
   },
 ) {
   const queryClient = useQueryClient();
@@ -27,9 +28,11 @@ export function useEffectMutation<Args, E, A>(
     mutationFn: (args: Args) => Runtime.runPromise(runtime)(effectFn(args)),
     onSuccess: (data) => {
       options?.onSuccess?.(data);
-      options?.invalidateQueries?.forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey });
-      });
+      if (options?.invalidateQueries) {
+        options.invalidateQueries.forEach((queryKey) => {
+          consumerPromise(queryClient.invalidateQueries({ queryKey }));
+        });
+      }
     },
     onError: options?.onError,
   });

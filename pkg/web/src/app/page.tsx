@@ -5,9 +5,15 @@ import { useDisclosure } from "@mantine/hooks";
 import dynamic from "next/dynamic";
 import { TodoList } from "../components/todo-list";
 
-const ThemeToggle = dynamic(() => import("../components/theme-toggle").then(mod => ({ default: mod.ThemeToggle })), {
-  ssr: false,
-});
+const ThemeToggle = dynamic(
+  () =>
+    import("../components/theme-toggle").then((mod) => ({
+      default: mod.ThemeToggle,
+    })),
+  {
+    ssr: false,
+  },
+);
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();

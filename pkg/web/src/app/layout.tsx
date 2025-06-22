@@ -1,5 +1,9 @@
 import "@mantine/core/styles.css";
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  mantineHtmlProps,
+} from "@mantine/core";
 import { QueryProvider } from "../components/query-provider";
 
 export default function RootLayout({
@@ -14,9 +18,7 @@ export default function RootLayout({
       </head>
       <body>
         <QueryProvider>
-          <MantineProvider>
-            {children}
-          </MantineProvider>
+          <MantineProvider>{children}</MantineProvider>
         </QueryProvider>
       </body>
     </html>

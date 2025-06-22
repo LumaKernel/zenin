@@ -26,6 +26,7 @@ export default tseslint.config(
       "**/*.md",
       "manage",
       "**/.next",
+      "scripts/**",
     ],
   },
   js.configs.recommended,

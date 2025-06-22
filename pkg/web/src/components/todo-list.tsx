@@ -34,21 +34,21 @@ export function TodoList() {
         setNewTodoText("");
       },
       invalidateQueries: [["todos"]],
-    }
+    },
   );
 
   const completeTodoMutation = useEffectMutation(
     (id: TodoId) => todosApi.completeTodo(id),
     {
       invalidateQueries: [["todos"]],
-    }
+    },
   );
 
   const removeTodoMutation = useEffectMutation(
     (id: TodoId) => todosApi.removeTodo(id),
     {
       invalidateQueries: [["todos"]],
-    }
+    },
   );
 
   const handleCreateTodo = () => {
@@ -78,11 +78,7 @@ export function TodoList() {
 
   if (error) {
     return (
-      <Alert
-        icon={<IconAlertCircle size="1rem" />}
-        title="エラー"
-        color="red"
-      >
+      <Alert icon={<IconAlertCircle size="1rem" />} title="エラー" color="red">
         Todoの取得に失敗しました: {String(error)}
       </Alert>
     );
