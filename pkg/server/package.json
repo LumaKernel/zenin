@@ -20,8 +20,11 @@
   "dependencies": {
     "@effect/platform": "latest",
     "@effect/platform-node": "latest",
+    "@prisma/client": "^6.10.1",
+    "@prisma/extension-accelerate": "^2.0.1",
     "@template/domain": "*",
-    "effect": "latest"
+    "effect": "latest",
+    "prisma": "^6.10.1"
   },
   "effect": {
     "generateExports": {

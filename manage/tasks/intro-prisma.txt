@@ -1,0 +1,33 @@
+Prismaを導入せよ。context7を利用して最新の方法を利用せよ。
+
+まずは、現在のデモアプリのTODOアプリを達成する形でセットアップせよ。
+
+
+テンプレート:
+```
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  posts   Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+```
+
