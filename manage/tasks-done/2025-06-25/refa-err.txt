@@ -1,0 +1,119 @@
+エラーがでました。
+
+
+===
+
+
+エラー
+Todoの取得に失敗しました: (FiberFailure) ApiError: API call failed: Internal Server Error BaseEffectError@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/Data.js:264:17 BaseEffectError@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/Data.js:287:17 ApiError@webpack-internal:///(app-pages-browser)/./src/lib/api-client.ts:9:1 apiCall/<@webpack-internal:///(app-pages-browser)/./src/lib/api-client.ts:27:103 state<@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/internal/fiberRuntime.js:269:110
+
+prisma:info Starting a sqlite pool with 17 connections.
+prisma:query SELECT `main`.`Todo`.`id`, `main`.`Todo`.`text`, `main`.`Todo`.`done`, `main`.`Todo`.`createdAt`, `main`.`Todo`.`updatedAt` FROM `main`.`Todo` WHERE 1=1 ORDER BY `main`.`Todo`.`id` ASC LIMIT ? OFFSET ?
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+The table `main.Todo` does not exist in the current database.
+[17:53:03.848] INFO (#23) http.span.1=76ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  The table `main.Todo` does not exist in the current database.
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:query SELECT `main`.`Todo`.`id`, `main`.`Todo`.`text`, `main`.`Todo`.`done`, `main`.`Todo`.`createdAt`, `main`.`Todo`.`updatedAt` FROM `main`.`Todo` WHERE 1=1 ORDER BY `main`.`Todo`.`id` ASC LIMIT ? OFFSET ?
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+The table `main.Todo` does not exist in the current database.
+[17:53:04.885] INFO (#24) http.span.2=3ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  The table `main.Todo` does not exist in the current database.
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:query SELECT `main`.`Todo`.`id`, `main`.`Todo`.`text`, `main`.`Todo`.`done`, `main`.`Todo`.`createdAt`, `main`.`Todo`.`updatedAt` FROM `main`.`Todo` WHERE 1=1 ORDER BY `main`.`Todo`.`id` ASC LIMIT ? OFFSET ?
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+The table `main.Todo` does not exist in the current database.
+[17:53:06.923] INFO (#25) http.span.3=6ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  The table `main.Todo` does not exist in the current database.
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:query SELECT `main`.`Todo`.`id`, `main`.`Todo`.`text`, `main`.`Todo`.`done`, `main`.`Todo`.`createdAt`, `main`.`Todo`.`updatedAt` FROM `main`.`Todo` WHERE 1=1 ORDER BY `main`.`Todo`.`id` ASC LIMIT ? OFFSET ?
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+The table `main.Todo` does not exist in the current database.
+[17:53:10.938] INFO (#26) http.span.4=2ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  The table `main.Todo` does not exist in the current database.
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+

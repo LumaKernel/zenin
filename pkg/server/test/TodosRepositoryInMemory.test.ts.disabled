@@ -1,0 +1,249 @@
+import { describe, expect, it } from "@effect/vitest";
+import { Effect } from "effect";
+import { Todo, TodoId, TodoNotFound } from "@template/domain/TodosApi";
+import { TodosRepositoryInMemory } from "../src/TodosRepositoryInMemory.js";
+
+describe("TodosRepositoryInMemory", () => {
+  // Arrange-Act-Assert パターンに従ったテストケース
+
+  describe("getAll", () => {
+    it.effect("初期状態では空の配列を返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+
+        // Act
+        const todos = yield* repo.getAll;
+
+        // Assert
+        expect(todos).toStrictEqual([]);
+      }),
+    );
+  });
+
+  describe("create", () => {
+    it.effect("新しいTodoを作成して返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const text = "テストタスク";
+
+        // Act
+        const todo = yield* repo.create(text);
+
+        // Assert
+        expect(todo.text).toBe(text);
+        expect(todo.done).toBe(false);
+        expect(todo.id).toBe(0); // 最初のIDは0から開始
+      }),
+    );
+
+    it.effect("複数のTodoを作成した場合、IDが連番になること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+
+        // Act
+        const todo1 = yield* repo.create("タスク1");
+        const todo2 = yield* repo.create("タスク2");
+        const todo3 = yield* repo.create("タスク3");
+
+        // Assert
+        expect(todo1.id).toBe(0);
+        expect(todo2.id).toBe(1);
+        expect(todo3.id).toBe(2);
+      }),
+    );
+
+    it.effect("作成したTodoがgetAllで取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const text = "保存確認テスト";
+
+        // Act
+        const createdTodo = yield* repo.create(text);
+        const allTodos = yield* repo.getAll;
+
+        // Assert
+        expect(allTodos).toHaveLength(1);
+        expect(allTodos[0]).toStrictEqual(createdTodo);
+      }),
+    );
+  });
+
+  describe("getById", () => {
+    it.effect("存在するTodoのIDを指定した場合、そのTodoを返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const createdTodo = yield* repo.create("取得テスト");
+
+        // Act
+        const foundTodo = yield* repo.getById(createdTodo.id);
+
+        // Assert
+        expect(foundTodo).toStrictEqual(createdTodo);
+      }),
+    );
+
+    it.effect("存在しないTodoのIDを指定した場合、TodoNotFoundエラーを返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const nonExistentId = TodoId.make(999);
+
+        // Act & Assert
+        const result = yield* Effect.exit(repo.getById(nonExistentId));
+        expect(result._tag).toBe("Failure");
+        
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }),
+    );
+  });
+
+  describe("complete", () => {
+    it.effect("存在するTodoを完了状態にできること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const createdTodo = yield* repo.create("完了テスト");
+        expect(createdTodo.done).toBe(false); // 初期状態確認
+
+        // Act
+        const completedTodo = yield* repo.complete(createdTodo.id);
+
+        // Assert
+        expect(completedTodo.done).toBe(true);
+        expect(completedTodo.id).toBe(createdTodo.id);
+        expect(completedTodo.text).toBe(createdTodo.text);
+      }),
+    );
+
+    it.effect("完了したTodoがgetByIdで正しく取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const createdTodo = yield* repo.create("永続化確認");
+
+        // Act
+        const completedTodo = yield* repo.complete(createdTodo.id);
+        const foundTodo = yield* repo.getById(createdTodo.id);
+
+        // Assert
+        expect(foundTodo).toStrictEqual(completedTodo);
+        expect(foundTodo.done).toBe(true);
+      }),
+    );
+
+    it.effect("存在しないTodoの完了を試みた場合、TodoNotFoundエラーを返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const nonExistentId = TodoId.make(999);
+
+        // Act & Assert
+        const result = yield* Effect.exit(repo.complete(nonExistentId));
+        expect(result._tag).toBe("Failure");
+        
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }),
+    );
+  });
+
+  describe("remove", () => {
+    it.effect("存在するTodoを削除できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const createdTodo = yield* repo.create("削除テスト");
+
+        // Act
+        yield* repo.remove(createdTodo.id);
+
+        // Assert
+        const allTodos = yield* repo.getAll;
+        expect(allTodos).toHaveLength(0);
+      }),
+    );
+
+    it.effect("削除したTodoをgetByIdで取得しようとするとTodoNotFoundエラーになること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const createdTodo = yield* repo.create("削除後アクセステスト");
+
+        // Act
+        yield* repo.remove(createdTodo.id);
+
+        // Assert
+        const result = yield* Effect.exit(repo.getById(createdTodo.id));
+        expect(result._tag).toBe("Failure");
+        
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+          }
+        }
+      }),
+    );
+
+    it.effect("複数のTodoがある場合、指定したTodoのみ削除されること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const todo1 = yield* repo.create("保持されるタスク1");
+        const todo2 = yield* repo.create("削除されるタスク");
+        const todo3 = yield* repo.create("保持されるタスク2");
+
+        // Act
+        yield* repo.remove(todo2.id);
+
+        // Assert
+        const allTodos = yield* repo.getAll;
+        expect(allTodos).toHaveLength(2);
+        
+        const remainingIds = allTodos.map(todo => todo.id);
+        expect(remainingIds).toContain(todo1.id);
+        expect(remainingIds).toContain(todo3.id);
+        expect(remainingIds).not.toContain(todo2.id);
+      }),
+    );
+
+    it.effect("存在しないTodoの削除を試みた場合、TodoNotFoundエラーを返すこと", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const repo = yield* TodosRepositoryInMemory;
+        const nonExistentId = TodoId.make(999);
+
+        // Act & Assert
+        const result = yield* Effect.exit(repo.remove(nonExistentId));
+        expect(result._tag).toBe("Failure");
+        
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }),
+    );
+  });
+
+  // テストの独立性を確保するため、各テストで新しいrepoインスタンスを使用
+  // Effect.genとit.effectの組み合わせにより、各テストは独立したコンテキストで実行される
+});

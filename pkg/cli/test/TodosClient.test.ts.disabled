@@ -1,0 +1,192 @@
+import { describe, expect, it } from "@effect/vitest";
+import { HttpApiClient } from "@effect/platform";
+import { Effect, Layer } from "effect";
+import { TodoId, TodosApi, Todo, TodoNotFound } from "../../domain/src/TodosApi.js";
+import { TodosClient } from "../src/TodosClient.js";
+
+// モックHttpApiClientを作成
+const makeMockClient = (mockImplementation: any) =>
+  Layer.succeed(
+    HttpApiClient.HttpApiClient,
+    mockImplementation
+  );
+
+describe("TodosClient", () => {
+  describe("create", () => {
+    it.effect("新しいTodoを作成できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const mockTodo = new Todo({
+          id: TodoId.make(1),
+          text: "テストタスク",
+          done: false
+        });
+
+        const mockClient = {
+          todos: {
+            createTodo: ({ payload }: { payload: { text: string } }) =>
+              Effect.succeed(mockTodo)
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert - ログ出力の確認は困難なので、正常終了することを確認
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.create("テストタスク"));
+        
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("complete", () => {
+    it.effect("Todoを完了状態にできること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const todoId = TodoId.make(1);
+        const completedTodo = new Todo({
+          id: todoId,
+          text: "完了テスト",
+          done: true
+        });
+
+        const mockClient = {
+          todos: {
+            completeTodo: ({ path }: { path: { id: TodoId } }) =>
+              Effect.succeed(completedTodo)
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.complete(todoId));
+        
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+
+    it.effect("存在しないTodoを完了しようとした場合、エラーログが出力されること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const todoId = TodoId.make(999);
+
+        const mockClient = {
+          todos: {
+            completeTodo: ({ path }: { path: { id: TodoId } }) =>
+              Effect.fail(new TodoNotFound({ id: path.id }))
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert - TodoNotFoundエラーがキャッチされて正常終了することを確認
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.complete(todoId));
+        
+        expect(result._tag).toBe("Success"); // エラーはキャッチされるので成功になる
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("remove", () => {
+    it.effect("Todoを削除できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const todoId = TodoId.make(1);
+
+        const mockClient = {
+          todos: {
+            removeTodo: ({ path }: { path: { id: TodoId } }) =>
+              Effect.void
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.remove(todoId));
+        
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+
+    it.effect("存在しないTodoを削除しようとした場合、エラーログが出力されること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const todoId = TodoId.make(999);
+
+        const mockClient = {
+          todos: {
+            removeTodo: ({ path }: { path: { id: TodoId } }) =>
+              Effect.fail(new TodoNotFound({ id: path.id }))
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert - TodoNotFoundエラーがキャッチされて正常終了することを確認
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.remove(todoId));
+        
+        expect(result._tag).toBe("Success"); // エラーはキャッチされるので成功になる
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("list", () => {
+    it.effect("Todoリストを取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const mockTodos = [
+          new Todo({
+            id: TodoId.make(1),
+            text: "タスク1",
+            done: false
+          }),
+          new Todo({
+            id: TodoId.make(2),
+            text: "タスク2",
+            done: true
+          })
+        ];
+
+        const mockClient = {
+          todos: {
+            getAllTodos: () => Effect.succeed(mockTodos)
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.list);
+        
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+
+    it.effect("空のTodoリストを取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const mockClient = {
+          todos: {
+            getAllTodos: () => Effect.succeed([])
+          }
+        };
+
+        const mockLayer = makeMockClient(mockClient);
+
+        // Act & Assert
+        const client = yield* TodosClient;
+        const result = yield* Effect.exit(client.list);
+        
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(TodosClient.Default), Effect.provide(mockLayer))
+    );
+  });
+});

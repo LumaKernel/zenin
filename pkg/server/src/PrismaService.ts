@@ -1,9 +1,9 @@
 import { PrismaClient } from "../../../generated/prisma/index.js";
 import { Effect, Layer } from "effect";
 
-export interface IPrismaService {
+export type IPrismaService = {
   readonly prisma: PrismaClient;
-}
+};
 
 export class PrismaService extends Effect.Tag("api/PrismaService")<
   PrismaService,

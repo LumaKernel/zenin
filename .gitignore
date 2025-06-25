@@ -23,4 +23,6 @@ scratchpad/*
 .trashed-*/
 *.trash/
 
+/prisma/*.db
+
 /generated/prisma

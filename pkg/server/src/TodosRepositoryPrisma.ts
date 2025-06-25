@@ -1,14 +1,14 @@
 import { Todo, TodoId, TodoNotFound } from "@template/domain/TodosApi";
-import { Effect, Layer } from "effect";
+import { Effect, Layer, Option } from "effect";
 import { PrismaService } from "./PrismaService.js";
 
-export interface TodosRepositoryPrismaShape {
+export type TodosRepositoryPrismaShape = {
   readonly getAll: Effect.Effect<ReadonlyArray<Todo>>;
   readonly getById: (id: TodoId) => Effect.Effect<Todo, TodoNotFound>;
   readonly create: (text: string) => Effect.Effect<Todo>;
   readonly complete: (id: TodoId) => Effect.Effect<Todo, TodoNotFound>;
   readonly remove: (id: TodoId) => Effect.Effect<void, TodoNotFound>;
-}
+};
 
 export class TodosRepositoryPrisma extends Effect.Tag(
   "api/TodosRepositoryPrisma",
@@ -41,16 +41,19 @@ export class TodosRepositoryPrisma extends Effect.Tag(
             where: { id },
           }),
         ).pipe(
-          Effect.flatMap((todo) =>
-            todo === null
-              ? Effect.fail(new TodoNotFound({ id }))
-              : Effect.succeed(
+          Effect.map(Option.fromNullable),
+          Effect.flatMap(
+            Option.match({
+              onNone: () => Effect.fail(new TodoNotFound({ id })),
+              onSome: (todo) =>
+                Effect.succeed(
                   new Todo({
                     id: TodoId.make(todo.id),
                     text: todo.text,
                     done: todo.done,
                   }),
                 ),
+            }),
           ),
         );
       }

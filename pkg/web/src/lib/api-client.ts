@@ -8,36 +8,48 @@ class ApiError extends Data.TaggedError("ApiError")<{
   readonly status?: number;
 }> {}
 
-const apiCall = <T>(endpoint: string, options: RequestInit = {}) =>
-  Effect.tryPromise({
-    try: async () => {
-      const response = await fetch(
-        `${baseUrl satisfies string}${endpoint satisfies string}`,
-        {
+const apiCall = <T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Effect.Effect<T, ApiError> =>
+  Effect.gen(function* () {
+    const response = yield* Effect.tryPromise({
+      try: () =>
+        fetch(`${baseUrl satisfies string}${endpoint satisfies string}`, {
           headers: {
             "Content-Type": "application/json",
             ...options.headers,
           },
           ...options,
-        },
+        }),
+      catch: (error) =>
+        new ApiError({
+          message: error instanceof Error ? error.message : "Network error",
+        }),
+    });
+
+    if (!response.ok) {
+      return yield* Effect.fail(
+        new ApiError({
+          message: `API call failed: ${response.statusText satisfies string}`,
+          status: response.status,
+        }),
       );
+    }
 
-      if (!response.ok) {
-        throw new Error(
-          `API call failed: ${response.statusText satisfies string}`,
-        );
-      }
+    if (options.method === "DELETE") {
+      return undefined as T;
+    }
 
-      if (endpoint.includes("DELETE")) {
-        return undefined as T;
-      }
+    const result = yield* Effect.tryPromise({
+      try: () => response.json() as Promise<T>,
+      catch: () =>
+        new ApiError({
+          message: "Failed to parse JSON response",
+        }),
+    });
 
-      return response.json() as T;
-    },
-    catch: (error) =>
-      new ApiError({
-        message: error instanceof Error ? error.message : "Unknown error",
-      }),
+    return result;
   });
 
 export const todosApi = {

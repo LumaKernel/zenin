@@ -31,6 +31,9 @@ const config: ViteUserConfig = {
       ...alias("cli"),
       ...alias("domain"),
       ...alias("server"),
+      "@template/domain": path.join(__dirname, "pkg", "domain", "src"),
+      "@template/cli": path.join(__dirname, "pkg", "cli", "src"),
+      "@template/server": path.join(__dirname, "pkg", "server", "src"),
     },
   },
 };

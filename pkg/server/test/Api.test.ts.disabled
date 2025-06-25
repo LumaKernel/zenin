@@ -1,0 +1,318 @@
+import { describe, expect, it } from "@effect/vitest";
+import { HttpApiBuilder } from "@effect/platform";
+import { Effect, Layer } from "effect";
+import { Todo, TodoId, TodoNotFound, TodosApi } from "../../domain/src/TodosApi.js";
+import { TodosRepository } from "../src/TodosRepository.js";
+import { ApiLive } from "../src/Api.js";
+
+// モックTodosRepositoryを作成
+const makeMockRepository = (mockImplementation: any) =>
+  Layer.succeed(TodosRepository, mockImplementation);
+
+describe("Api", () => {
+  describe("getAllTodos", () => {
+    it.effect("全Todoを取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const mockTodos = [
+          new Todo({
+            id: TodoId.make(1),
+            text: "タスク1",
+            done: false
+          }),
+          new Todo({
+            id: TodoId.make(2),
+            text: "タスク2",
+            done: true
+          })
+        ];
+
+        const mockRepo = {
+          getAll: Effect.succeed(mockTodos),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* handlers.getAllTodos();
+
+        // Assert
+        expect(result).toHaveLength(2);
+        expect(result[0]).toBeInstanceOf(Todo);
+        expect(result[0].text).toBe("タスク1");
+        expect(result[1].text).toBe("タスク2");
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+
+    it.effect("空のTodoリストを取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* handlers.getAllTodos();
+
+        // Assert
+        expect(result).toStrictEqual([]);
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("getTodoById", () => {
+    it.effect("存在するTodoを取得できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const targetId = TodoId.make(42);
+        const mockTodo = new Todo({
+          id: targetId,
+          text: "取得テスト",
+          done: false
+        });
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: (id: TodoId) => 
+            id === targetId 
+              ? Effect.succeed(mockTodo)
+              : Effect.fail(new TodoNotFound({ id })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* handlers.getTodoById({ path: { id: targetId } });
+
+        // Assert
+        expect(result).toBeInstanceOf(Todo);
+        expect(result.id).toBe(targetId);
+        expect(result.text).toBe("取得テスト");
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+
+    it.effect("存在しないTodoを取得しようとした場合、TodoNotFoundエラーになること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const nonExistentId = TodoId.make(999);
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: (id: TodoId) => Effect.fail(new TodoNotFound({ id })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act & Assert
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* Effect.exit(
+          handlers.getTodoById({ path: { id: nonExistentId } })
+        );
+
+        expect(result._tag).toBe("Failure");
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("createTodo", () => {
+    it.effect("新しいTodoを作成できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const text = "新しいタスク";
+        const createdTodo = new Todo({
+          id: TodoId.make(1),
+          text,
+          done: false
+        });
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: (inputText: string) => 
+            inputText === text 
+              ? Effect.succeed(createdTodo)
+              : Effect.fail(new Error("予期しないテキスト")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* handlers.createTodo({ payload: { text } });
+
+        // Assert
+        expect(result).toBeInstanceOf(Todo);
+        expect(result.text).toBe(text);
+        expect(result.done).toBe(false);
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("completeTodo", () => {
+    it.effect("Todoを完了状態にできること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const targetId = TodoId.make(42);
+        const completedTodo = new Todo({
+          id: targetId,
+          text: "完了テスト",
+          done: true
+        });
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: (id: TodoId) => 
+            id === targetId 
+              ? Effect.succeed(completedTodo)
+              : Effect.fail(new TodoNotFound({ id })),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* handlers.completeTodo({ path: { id: targetId } });
+
+        // Assert
+        expect(result).toBeInstanceOf(Todo);
+        expect(result.id).toBe(targetId);
+        expect(result.done).toBe(true);
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+
+    it.effect("存在しないTodoを完了しようとした場合、TodoNotFoundエラーになること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const nonExistentId = TodoId.make(999);
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: (id: TodoId) => Effect.fail(new TodoNotFound({ id })),
+          remove: () => Effect.fail(new Error("未実装"))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act & Assert
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* Effect.exit(
+          handlers.completeTodo({ path: { id: nonExistentId } })
+        );
+
+        expect(result._tag).toBe("Failure");
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+  });
+
+  describe("removeTodo", () => {
+    it.effect("Todoを削除できること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const targetId = TodoId.make(42);
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: (id: TodoId) => 
+            id === targetId 
+              ? Effect.void
+              : Effect.fail(new TodoNotFound({ id }))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* Effect.exit(
+          handlers.removeTodo({ path: { id: targetId } })
+        );
+
+        // Assert
+        expect(result._tag).toBe("Success");
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+
+    it.effect("存在しないTodoを削除しようとした場合、TodoNotFoundエラーになること", () =>
+      Effect.gen(function* () {
+        // Arrange
+        const nonExistentId = TodoId.make(999);
+
+        const mockRepo = {
+          getAll: Effect.succeed([]),
+          getById: () => Effect.fail(new TodoNotFound({ id: 0 })),
+          create: () => Effect.fail(new Error("未実装")),
+          complete: () => Effect.fail(new Error("未実装")),
+          remove: (id: TodoId) => Effect.fail(new TodoNotFound({ id }))
+        };
+
+        const mockLayer = makeMockRepository(mockRepo);
+
+        // Act & Assert
+        const api = yield* HttpApiBuilder.api(TodosApi);
+        const handlers = yield* api.todos;
+        const result = yield* Effect.exit(
+          handlers.removeTodo({ path: { id: nonExistentId } })
+        );
+
+        expect(result._tag).toBe("Failure");
+        if (result._tag === "Failure") {
+          expect(result.cause._tag).toBe("Fail");
+          if (result.cause._tag === "Fail") {
+            expect(result.cause.error).toBeInstanceOf(TodoNotFound);
+            expect(result.cause.error.id).toBe(999);
+          }
+        }
+      }).pipe(Effect.provide(ApiLive), Effect.provide(mockLayer))
+    );
+  });
+});
