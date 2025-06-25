@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components/TodoList Default smoke-test 1`] = `""`;
+
+exports[`Components/TodoList EmptyState smoke-test 1`] = `""`;
+
+exports[`Components/TodoList Error smoke-test 1`] = `""`;
+
+exports[`Components/TodoList Loading smoke-test 1`] = `""`;
+
+exports[`Components/TodoList WithMockData smoke-test 1`] = `""`;

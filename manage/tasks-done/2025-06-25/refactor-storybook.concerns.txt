@@ -1,0 +1,57 @@
+# Storybookリファクタリング - 懸念事項
+
+## 完了した作業
+
+### ボイラープレート削除
+- 不要なButton、Header、Pageコンポーネントを`_unsafe_trashed/`に移動
+- 関連するCSSファイルとassetsも整理
+
+### 設定の最適化
+- TypeScript設定でreact-docgen-typescriptを有効化
+- MantineProviderをdecoratorに追加
+- ライト・ダークテーマのバックグラウンド設定
+
+### 実際のコンポーネントStory作成
+- TodoList: モックデータ、ローディング、エラー状態を含む
+- ThemeToggle: ライト・ダークテーマでの表示確認
+- Introduction.mdx: プロジェクト概要とガイドライン
+
+## 懸念事項
+
+### 1. Storybookアドオンの制限
+- 既存の依存関係との互換性でessentials等のアドオンが追加できない
+- カバレッジとドキュメント以外のアドオンが不足
+
+### 2. API Mockingの未完成
+- TodoListのStoryでAPIモックが完全に動作しない可能性
+- MSW等のモッキングライブラリ導入が必要かもしれない
+
+### 3. テスト統合
+- Storybook Test Runnerの設定が未完成
+- Playwright統合が不完全
+
+## やり残し・TODO
+
+### 高優先度
+- [ ] API MockingライブラリのMSW導入
+- [ ] TodoListのAPIモック完全対応
+- [ ] Chromatic等のビジュアルテスト導入
+
+### 中優先度
+- [ ] アクセシビリティテストのアドオン導入
+- [ ] コンポーネントの単体テストStory追加
+- [ ] カスタムテーマのStory対応
+
+### 低優先度
+- [ ] Figmaデザイントークン連携
+- [ ] Performance Addon導入
+- [ ] CI/CDでのStorybook自動デプロイ
+
+## 技術的な学び
+- Storybookのアドオン依存関係管理
+- MantineとStorybookの統合パターン
+- Effect.tsベースコンポーネントのStory作成方法
+
+## 品質評価
+ボイラープレートを削除し、実際のプロジェクトコンポーネントに特化したStorybookに変更完了。
+基本的なStoryは作成されたが、APIモッキングとテスト統合で改善の余地あり。

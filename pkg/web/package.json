@@ -15,10 +15,10 @@
     "start": "next start --port 5928",
     "lint": "next lint",
     "check": "tsc --noEmit",
-    "storybook": "storybook dev -p 5936",
+    "storybook": "storybook dev -p 5936 --no-open",
     "build-storybook": "storybook build",
-    "test-storybook": "test-storybook",
-    "test-storybook:coverage": "test-storybook --coverage"
+    "test-storybook": "test-storybook --url http://localhost:5936",
+    "test-storybook:coverage": "test-storybook --coverage --url http://localhost:5936"
   },
   "dependencies": {
     "@mantine/carousel": "^8.1.1",

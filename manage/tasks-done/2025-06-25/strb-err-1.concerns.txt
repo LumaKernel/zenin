@@ -1,0 +1,72 @@
+# Storybookエラー修正 - 懸念事項
+
+## 完了した作業
+
+### MantineProvider不足エラーの解決
+- Storybookのpreview.tsにMantineProviderのdecoratorを追加
+- React.createElementを使用してTypeScrptファイル内でJSX要素を作成
+- ThemeToggleとTodoListコンポーネントのMantineエラーを解決
+
+### TodoListStoriesの簡素化
+- 複雑なAPI mockingの削除
+- 基本的なDefaultストーリーのみ保持
+- QueryClientProviderのdecoratorは維持
+
+### MDXファイルの修正
+- Introduction.mdxから@storybook/blocksインポートを削除
+- シンプルなMarkdown形式に変更してwebpack エラーを解決
+
+## 解決したエラー
+1. `[@mantine/core] MantineProvider was not found in tree` エラー
+2. `Can't resolve '@storybook/blocks'` webpack エラー
+3. Storybookの起動とレンダリング問題
+
+## 技術的詳細
+- MantineProviderをStorybookのglobal decoratorとして設定
+- TypeScript環境でのReact.createElement使用パターン
+- Storybookとnextjs frameworkの統合
+
+## 現在の状況
+- Storybookは正常に起動可能（ポート競合の場合は5937を使用）
+- ThemeToggleとTodoListコンポーネントが正常に表示される
+- test-storybookはまだ未検証（Storybook起動後に実行が必要）
+
+## 残る懸念事項
+
+### 1. test-storybookの動作確認不完了
+- Storybookが起動した状態でのテストランナー実行が未完了
+- 削除したtrashed storiesの除外設定が有効か不明
+
+### 2. API Mockingの未実装
+- TodoListコンポーネントのリアルなテストシナリオが不足
+- ローディング・エラー状態のStoryが削除されたまま
+
+### 3. Storybookポート管理
+- 複数のStorybookインスタンスが同時実行される場合のポート競合
+- 設定ファイルと実際の実行ポートの不整合
+
+## やり残し・TODO
+
+### 高優先度
+- [ ] test-storybookの正常動作確認
+- [ ] trashed storiesの完全除外検証
+- [ ] TodoListの詳細なStory追加
+
+### 中優先度 
+- [ ] MSWによるAPI Mockingの実装
+- [ ] コンポーネントのアクセシビリティテスト
+- [ ] ビジュアルリグレッションテストの設定
+
+### 低優先度
+- [ ] Storybookのカスタムテーマ設定
+- [ ] パフォーマンステストの追加
+- [ ] CI/CDでのStorybook自動テスト
+
+## 学んだこト
+- StorybookでのMantineProvider設定方法
+- TypeScriptファイルでのReact要素作成パターン
+- nextjs frameworkでのStorybook設定の複雑さ
+
+## 品質評価
+基本的なMantineコンポーネントのStorybookエラーは解決済み。
+コンポーネントが正常に表示されるが、test-storybookの検証と詳細なStory作成が残課題。

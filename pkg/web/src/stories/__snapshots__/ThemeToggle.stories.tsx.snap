@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components/ThemeToggle DarkTheme smoke-test 1`] = `""`;
+
+exports[`Components/ThemeToggle Default smoke-test 1`] = `""`;
+
+exports[`Components/ThemeToggle LightTheme smoke-test 1`] = `""`;

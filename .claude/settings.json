@@ -16,7 +16,8 @@
       "Read(*.local)",
       "Write(*.local)",
       "Read(*.local.*)",
-      "Write(*.local.*)"
+      "Write(*.local.*)",
+      "Write(package.json)"
     ]
   }
 }
