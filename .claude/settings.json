@@ -12,7 +12,11 @@
     ],
     "deny": [
       "Bash(pnpm:*)",
-      "Bash(yarn:*)"
+      "Bash(yarn:*)",
+      "Read(*.local)",
+      "Write(*.local)",
+      "Read(*.local.*)",
+      "Write(*.local.*)"
     ]
   }
 }
