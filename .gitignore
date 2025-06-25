@@ -22,3 +22,5 @@ scratchpad/*
 *.trashed
 .trashed-*/
 *.trash/
+
+/generated/prisma

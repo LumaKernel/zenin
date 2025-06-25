@@ -46,6 +46,7 @@
     "eslint-plugin-sort-destructure-keys": "^2.0.0",
     "glob": "^11.0.3",
     "prettier": "^3.5.3",
+    "prisma": "^6.10.1",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1",
@@ -53,6 +54,7 @@
   },
   "dependencies": {
     "@effect/cluster": "^0.39.4",
-    "@effect/experimental": "^0.49.2"
+    "@effect/experimental": "^0.49.2",
+    "@prisma/client": "^6.10.1"
   }
 }

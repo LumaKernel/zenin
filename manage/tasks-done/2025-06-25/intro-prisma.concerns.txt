@@ -1,0 +1,40 @@
+# Prisma導入 - 懸念事項とやり残し
+
+## 完了した作業
+- Prismaパッケージのインストール
+- Todoモデルのスキーマ定義
+- PrismaServiceとTodosRepositoryPrismaの実装
+- Effect.tsとの統合
+- SQLiteでの開発環境構築
+- マイグレーションの実行
+
+## 懸念事項
+
+### 1. 本番環境での設定
+- 現在はSQLiteで開発しているが、本番ではPostgreSQLが推奨
+- Prisma Accelerateの設定を適切に行う必要がある
+- 環境変数の管理（.env.local vs .env）
+
+### 2. エラーハンドリング
+- Prismaのエラーを適切にEffect.tsのエラー型にマッピングする必要
+- 現在はcatchAllでTodoNotFoundにしているが、より細かい制御が必要かも
+
+### 3. パフォーマンス
+- Prisma Clientの設定でログレベルを本番では調整する必要
+- コネクションプールの設定を検討
+
+### 4. テスト
+- Prismaを使用したテストの作成
+- モックやテストデータベースの設定
+
+## やり残し・TODO
+- [ ] 本番用PostgreSQL設定の作成
+- [ ] Prisma Accelerateの適切な設定
+- [ ] より詳細なエラーハンドリング
+- [ ] Prismaを使用したテストの実装
+- [ ] データベースシードファイルの作成
+
+## 技術的な学び
+- Effect.tsとPrismaの統合パターン
+- Effect.TagとLayer.effectを使用したDI
+- Prismaのマイグレーション管理

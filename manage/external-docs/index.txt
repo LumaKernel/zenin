@@ -1,3 +1,4 @@
 - Effect.ts: effect-ts/llms-full.txt
 - Effect.ts ピア依存関係: effect-ts/peer-dependencies.txt
 - Next.js Turbopack workspaces問題: nextjs/workspace-turbopack-issues.txt
+- Prisma: prisma/setup-and-usage.txt

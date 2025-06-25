@@ -1,0 +1,54 @@
+# Prisma Setup and Usage
+
+## Installation
+```bash
+npm install prisma --save-dev
+npm install @prisma/client
+```
+
+## Initialization
+```bash
+npx prisma init --datasource-provider postgresql
+```
+
+## Schema Definition
+- スキーマファイル: `prisma/schema.prisma`
+- 基本構造:
+  ```prisma
+  generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+  }
+
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
+
+  model Todo {
+    id        Int     @id @default(autoincrement())
+    text      String
+    done      Boolean @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  }
+  ```
+
+## Client Generation
+```bash
+npx prisma generate
+```
+
+## Effect.ts Integration
+- PrismaServiceをEffect.Tagとして定義
+- Layerを使ってDIコンテナを構成
+- scoped layerでconnection管理
+- tryPromise→promiseの変更でエラーハンドリング簡略化
+
+## Key Files Created
+- pkg/server/src/PrismaService.ts - Prisma client service
+- pkg/server/src/TodosRepositoryPrisma.ts - Prisma-based repository implementation
+- pkg/server/src/TodosRepository.ts - Repository interface and layer configuration
+
+## Environment Variables
+DATABASE_URL="postgresql://postgres:password@localhost:5432/zenin_todo?schema=public"

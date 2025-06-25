@@ -38,6 +38,8 @@
   - type guardの利用を検討する
   - const isSomething = () => ...のような関数を作る
 - anyをとにかく利用しない
+- optionalやnullishではなくEffect.tsのOptionを利用せよ
+- throwの利用を控え、Effect.tsの利用を検討せよ
 
 # テスト駆動
 
@@ -71,7 +73,4 @@
   - DRY原則を守る
   - 可読性を重視する
   - 適切な抽象化を行う
-
-
-
 

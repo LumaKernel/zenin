@@ -1,0 +1,141 @@
+以下のようなエラーが出ています。
+
+
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+ INFO (#26) http.span.4=3ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+ INFO (#27) http.span.5=21ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+ INFO (#28) http.span.6=4ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+ INFO (#29) http.span.7=8ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+prisma:error
+Invalid `prisma.todo.findMany()` invocation in
+/Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+  19 const { prisma } = yield* PrismaService;
+  20
+  21 const getAll = Effect.promise(() =>
+→ 22   prisma.todo.findMany(
+Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+ INFO (#30) http.span.8=5ms:
+  PrismaClientKnownRequestError:
+  Invalid `prisma.todo.findMany()` invocation in
+  /Users/luma/ghq/github.com/LumaKernel/zenin/pkg/server/src/TodosRepositoryPrisma.ts:22:21
+
+    19 const { prisma } = yield* PrismaService;
+    20
+    21 const getAll = Effect.promise(() =>
+  → 22   prisma.todo.findMany(
+  Error validating datasource `db`: the URL must start with the protocol `prisma://` or `prisma+postgres://`
+      at Zn.handleRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:7459)
+      at Zn.handleAndLogRequestError (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6784)
+      at Zn.request (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:124:6491)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async l (/Users/luma/ghq/github.com/LumaKernel/zenin/generated/prisma/runtime/library.js:133:9778)
+  http.status: 500
+  http.method: GET
+  http.url: /todos
+
+
+エラー
+Todoの取得に失敗しました: (FiberFailure) ApiError: API call failed: Internal Server Error BaseEffectError@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/Data.js:264:17 BaseEffectError@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/Data.js:287:17 ApiError@webpack-internal:///(app-pages-browser)/./src/lib/api-client.ts:9:1 catch@webpack-internal:///(app-pages-browser)/./src/lib/api-client.ts:30:25 fail/<@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/internal/core-effect.js:675:91 value<@webpack-internal:///(app-pages-browser)/../../node_modules/effect/dist/esm/internal/fiberRuntime.js:1006:86
