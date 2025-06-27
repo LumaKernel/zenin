@@ -1,11 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Components/TodoList Default smoke-test 1`] = `""`;
-
-exports[`Components/TodoList EmptyState smoke-test 1`] = `""`;
-
-exports[`Components/TodoList Error smoke-test 1`] = `""`;
-
-exports[`Components/TodoList Loading smoke-test 1`] = `""`;
-
-exports[`Components/TodoList WithMockData smoke-test 1`] = `""`;
+exports[`Components/TodoList Default smoke-test 1`] = `
+<style data-mantine-styles="classes">
+  @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+</style>
+<div class="m_66836ed3 mantine-Alert-root"
+     id="mantine-czem0q2e8"
+     role="alert"
+     aria-describedby="mantine-czem0q2e8-body"
+     aria-labelledby="mantine-czem0q2e8-title"
+     style="--alert-bg: var(--mantine-color-red-light); --alert-color: var(--mantine-color-red-light-color); --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
+>
+  <div class="m_a5d60502 mantine-Alert-wrapper">
+    <div class="m_667f2a6a mantine-Alert-icon">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="1rem"
+           height="1rem"
+           viewbox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           class="tabler-icon tabler-icon-alert-circle "
+      >
+        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0">
+        </path>
+        <path d="M12 8v4">
+        </path>
+        <path d="M12 16h.01">
+        </path>
+      </svg>
+    </div>
+    <div class="m_667c2793 mantine-Alert-body">
+      <div class="m_6a03f287 mantine-Alert-title">
+        <span id="mantine-czem0q2e8-title"
+              class="m_698f4f23 mantine-Alert-label"
+        >
+          エラー
+        </span>
+      </div>
+      <div id="mantine-czem0q2e8-body"
+           class="m_7fa78076 mantine-Alert-message"
+      >
+        Todoの取得に失敗しました: (FiberFailure) ApiError: Failed to fetch
+    at catch (http://localhost:5936/stories-TodoList-stories.iframe.bundle.js:3018:16)
+    at http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-676696.iframe.bundle.js:48434:84
+    at http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-676696.iframe.bundle.js:55797:84
+      </div>
+    </div>
+  </div>
+</div>
+`;
