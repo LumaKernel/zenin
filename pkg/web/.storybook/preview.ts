@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/nextjs'
 import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { withStorybookProviders } from '../src/decorators/with-storybook-providers';
 
 const preview: Preview = {
   parameters: {
@@ -26,6 +27,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    withStorybookProviders,
     (Story) => React.createElement(MantineProvider, {}, React.createElement(Story)),
   ],
 };

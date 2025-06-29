@@ -1,0 +1,9 @@
+[MSW] Failed to register the Service Worker:
+
+The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:
+
+    Missing Context/Providers: You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the Decorators documentation.
+    Misconfigured Webpack or Vite: Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring Webpack or Vite with Storybook.
+    Missing Environment Variables: Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the Environment Variables documentation.
+
+ServiceWorker script at http://localhost:5936/mockServiceWorker.js for scope http://localhost:5936/ encountered an error during installation

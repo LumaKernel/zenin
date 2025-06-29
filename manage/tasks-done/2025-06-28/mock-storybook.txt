@@ -1,0 +1,39 @@
+Storybookは本物のデータベース、APIを参照しているが、ストーリーは基本的には、APIとの責務の分離点を意識して再度設計せよ。
+モックしてAPIなしで動くようにするなどを検討し、また今後似たようなものを追加することを想定した基礎セットアップをせよ。
+Google検索(gemini検索)やcontext7も活用せよ。
+
+## 完了内容
+
+### 実装した機能
+1. **APIモック基盤**: Effect.ts + React Query対応のモック系統
+2. **Context-based DI**: APIクライアントの依存性注入システム
+3. **状態別ストーリー**: Default, Empty, Loading, Error, ManyTodosの5つの状態
+4. **型安全性**: TypeScriptの型システムを活用した実装
+
+### 作成ファイル
+- `/pkg/web/src/mocks/api-client-mock.ts` - APIクライアントのモック実装
+- `/pkg/web/src/contexts/api-context.tsx` - APIクライアントの依存性注入
+- `/pkg/web/src/decorators/with-storybook-providers.tsx` - Storybook用プロバイダー
+- `/pkg/web/src/mocks/README.md` - モック利用ガイドライン
+- `/pkg/web/src/mocks/handlers.ts` - MSWハンドラー（最終的に未使用）
+- `/pkg/web/src/mocks/browser.ts` - MSWブラウザー設定（最終的に未使用）
+- `/pkg/web/src/mocks/story-handlers.ts` - ストーリー用ハンドラー（最終的に未使用）
+
+### 修正ファイル
+- `/pkg/web/.storybook/main.ts` - アドオン設定更新
+- `/pkg/web/.storybook/preview.ts` - デコレーター設定
+- `/pkg/web/src/components/todo-list.tsx` - APIコンテキスト対応
+- `/pkg/web/src/stories/TodoList.stories.tsx` - 状態別ストーリー作成
+- `/pkg/web/src/stories/ThemeToggle.stories.tsx` - モック対応
+
+### 技術的特徴
+- **Effect.ts活用**: `Effect.never`でLoading状態、`Effect.fail`でError状態を正確に再現
+- **ネットワーク分離**: 実際のAPI呼び出しを完全に回避
+- **拡張性**: 今後のコンポーネント追加時の基盤を整備
+- **保守性**: 既存のAPIクライアントとの互換性を保持
+
+### 学習事項
+- MSWのService Worker問題を回避し、より確実なモック手法を採用
+- React QueryのsetQueryStateが存在しないことを確認
+- Storybookデコレーターの適用順序に関する理解
+- Effect.tsでの永続的pending状態作成手法

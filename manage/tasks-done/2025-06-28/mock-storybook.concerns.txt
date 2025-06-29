@@ -1,0 +1,33 @@
+## 懸念事項・今後の改善点
+
+### 1. 本番環境でのAPIコンテキスト提供
+- 現在TodoListコンポーネントはAPIコンテキストに依存している
+- 本番のApp.tsxやlayout.tsxでApiProviderをmockData=undefinedで提供する必要がある
+- TODO: 本番環境での適切なプロバイダー設定を確認
+
+### 2. 他のAPIクライアント
+- 現在はtodosApiのみ対応
+- 今後他のAPIが追加された場合、api-context.tsxとapi-client-mock.tsを拡張する必要
+- TODO: スケーラブルなAPI依存性注入パターンの検討
+
+### 3. MSWファイルの残存
+- MSWアプローチを断念したが、関連ファイルが残っている
+- `/pkg/web/src/mocks/handlers.ts`, `browser.ts`, `story-handlers.ts`
+- `/pkg/web/public/mockServiceWorker.js`
+- TODO: 不要なMSWファイルのクリーンアップを検討
+
+### 4. デコレーター名称
+- `withStorybookProviders`という汎用名だが、実際はAPIモック専用
+- TODO: より明確な名称への変更を検討（`withMockApi`など）
+
+### 5. エラーハンドリングの統一
+- 現在はError型でエラーを作成しているが、ApiErrorとの整合性
+- TODO: 本番のApiErrorと同じ型でモックエラーを作成
+
+### 6. パフォーマンス
+- 各ストーリー表示時にQueryClientを新規作成している
+- TODO: 必要に応じてQueryClientの再利用を検討
+
+### 7. テスト
+- Storybookテストランナーでのテスト通過確認
+- TODO: `npm run test-storybook`の実行とスナップショット更新

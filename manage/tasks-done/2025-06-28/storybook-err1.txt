@@ -1,0 +1,7 @@
+http://localhost:5936/?path=/story/components-todolist--default
+
+エラー
+Todoの取得に失敗しました: (FiberFailure) ApiError: NetworkError when attempting to fetch resource. BaseEffectError@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-39de95.iframe.bundle.js:11136:9 BaseEffectError@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-39de95.iframe.bundle.js:11164:22 ApiError@http://localhost:5936/stories-TodoList-stories.iframe.bundle.js:2996:1 catch@http://localhost:5936/stories-TodoList-stories.iframe.bundle.js:3018:16 ../../node_modules/effect/dist/esm/internal/core-effect.js/tryPromise/fail/<@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-39de95.iframe.bundle.js:46210:91 ../../node_modules/effect/dist/esm/internal/fiberRuntime.js/</value<@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-39de95.iframe.bundle.js:53573:84
+
+
+And did you pass npm run -w=pkg/web test-storybook ?

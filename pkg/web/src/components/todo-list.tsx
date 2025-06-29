@@ -15,11 +15,12 @@ import {
 import { IconTrash, IconPlus, IconAlertCircle } from "@tabler/icons-react";
 import { useState } from "react";
 import { useEffectQuery, useEffectMutation } from "../hooks/use-effect-query";
-import { todosApi } from "../lib/api-client";
+import { useApi } from "../contexts/api-context";
 import { Todo, TodoId } from "@domain/TodosApi";
 
 export function TodoList() {
   const [newTodoText, setNewTodoText] = useState("");
+  const { todosApi } = useApi();
 
   const {
     data: todos,

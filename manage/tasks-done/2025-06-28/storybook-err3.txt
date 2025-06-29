@@ -1,0 +1,25 @@
+_tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__.QueryClient is not a constructor
+
+The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:
+
+    Missing Context/Providers: You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the Decorators documentation.
+    Misconfigured Webpack or Vite: Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring Webpack or Vite with Storybook.
+    Missing Environment Variables: Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the Environment Variables documentation.
+
+withMockApi@http://localhost:5936/main.fa48fb0cbd9e4a05fdb8.hot-update.js:573:48
+Vx/t<@http://localhost:5936/sb-preview/runtime.js:20869:14
+SR/<@http://localhost:5936/sb-preview/runtime.js:43398:18
+zy/n</<@http://localhost:5936/sb-preview/runtime.js:43423:8
+react-stack-bottom-frame@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:23008:20
+renderWithHooks@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:6701:40
+updateFunctionComponent@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:8965:19
+beginWork@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:10590:18
+runWithFiberInDEV@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:882:13
+performUnitOfWork@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:15292:22
+workLoopSync@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:15112:58
+renderRootSync@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:15092:11
+performWorkOnRoot@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14603:44
+performWorkOnRootViaSchedulerTask@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:16384:24
+flushActQueue@http://localhost:5936/vendors-node_modules_mantine_core_esm_core_MantineProvider_MantineProvider_mjs-node_modules_s-8c6c09.iframe.bundle.js:47752:42
+../../node_modules/next/dist/compiled/react/cjs/react.development.js/exports.act/then/<@http://localhost:5936/vendors-node_modules_mantine_core_esm_core_MantineProvider_MantineProvider_mjs-node_modules_s-8c6c09.iframe.bundle.js:48008:34
+

@@ -52,3 +52,11 @@ exports[`Components/TodoList Default smoke-test 1`] = `
   </div>
 </div>
 `;
+
+exports[`Components/TodoList Empty smoke-test 1`] = `""`;
+
+exports[`Components/TodoList Error smoke-test 1`] = `""`;
+
+exports[`Components/TodoList Loading smoke-test 1`] = `""`;
+
+exports[`Components/TodoList ManyTodos smoke-test 1`] = `""`;

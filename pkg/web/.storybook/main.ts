@@ -17,7 +17,8 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-coverage')
+    getAbsolutePath('@storybook/addon-coverage'),
+    'msw-storybook-addon'
   ],
   framework: {
     name: getAbsolutePath('@storybook/nextjs'),

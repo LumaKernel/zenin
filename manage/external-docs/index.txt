@@ -2,3 +2,4 @@
 - Effect.ts ピア依存関係: effect-ts/peer-dependencies.txt
 - Next.js Turbopack workspaces問題: nextjs/workspace-turbopack-issues.txt
 - Prisma: prisma/setup-and-usage.txt
+- Storybook 2024 モッキングベストプラクティス: storybook/mocking-best-practices-2024.txt

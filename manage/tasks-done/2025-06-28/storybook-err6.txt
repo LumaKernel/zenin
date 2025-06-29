@@ -1,0 +1,69 @@
+GREAT! it seems now working positive patterns. but still...
+
+http://localhost:5936/?path=/story/components-todolist--loading
+エラー
+Todoの取得に失敗しました: (FiberFailure) ApiError: NetworkError when attempting to fetch resource. BaseEffectError@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-76c21b.iframe.bundle.js:11136:9 BaseEffectError@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-76c21b.iframe.bundle.js:11164:22 ApiError@http://localhost:5936/stories-TodoList-stories.iframe.bundle.js:2996:1 catch@http://localhost:5936/stories-TodoList-stories.iframe.bundle.js:3018:16 ../../node_modules/effect/dist/esm/internal/core-effect.js/tryPromise/fail/<@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-76c21b.iframe.bundle.js:46210:91 ../../node_modules/effect/dist/esm/internal/fiberRuntime.js/</value<@http://localhost:5936/vendors-node_modules_mantine_core_esm_components_Alert_Alert_mjs-node_modules_mantine_core_es-76c21b.iframe.bundle.js:53573:84
+
+
+
+http://localhost:5936/?path=/story/components-todolist--error
+queryClient.setQueryState is not a function
+
+The component failed to render properly, likely due to a configuration issue in Storybook. Here are some common causes and how you can address them:
+
+    Missing Context/Providers: You can use decorators to supply specific contexts or providers, which are sometimes necessary for components to render correctly. For detailed instructions on using decorators, please visit the Decorators documentation.
+    Misconfigured Webpack or Vite: Verify that Storybook picks up all necessary settings for loaders, plugins, and other relevant parameters. You can find step-by-step guides for configuring Webpack or Vite with Storybook.
+    Missing Environment Variables: Your Storybook may require specific environment variables to function as intended. You can set up custom environment variables as outlined in the Environment Variables documentation.
+
+MockDataSetter.useEffect@http://localhost:5936/main.iframe.bundle.js:729:21
+react-stack-bottom-frame@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:23089:20
+runWithFiberInDEV@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:882:13
+commitHookEffectListMount@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:12012:29
+commitHookPassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:12133:11
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13963:13
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:14082:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13956:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13966:49
+recursivelyTraversePassiveMountEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13936:36
+commitPassiveMountOnFiber@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:13975:49
+flushPassiveEffects@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:15903:34
+../../node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js/commitRoot/<@http://localhost:5936/vendors-node_modules_storybook_react-dom-shim_dist_react-18_mjs.iframe.bundle.js:15539:34
+flushActQueue@http://localhost:5936/vendors-node_modules_mantine_core_esm_core_MantineProvider_MantineProvider_mjs-node_modules_s-78a650.iframe.bundle.js:27928:42
+../../node_modules/next/dist/compiled/react/cjs/react.development.js/exports.act/then/<@http://localhost:5936/vendors-node_modules_mantine_core_esm_core_MantineProvider_MantineProvider_mjs-node_modules_s-78a650.iframe.bundle.js:28184:34
+
+

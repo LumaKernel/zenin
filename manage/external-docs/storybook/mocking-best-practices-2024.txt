@@ -1,0 +1,110 @@
+# Storybook 2024 モッキングベストプラクティス
+
+## MSW (Mock Service Worker) との統合
+
+### 主要な利点
+- Service Workerレベルでのリクエストインターセプト
+- ブラウザー環境でのリアルなネットワークモック
+- TypeScriptサポートと型安全性
+- Effect.tsとの良好な統合
+
+### セットアップ手順
+1. MSWのインストール: `npm install --save-dev msw`
+2. Service Workerの初期化: `npx msw init public/`
+3. ハンドラーの作成とStorybookデコレーターへの統合
+
+## Effect.ts + React Query との統合パターン
+
+### useEffectQuery パターン
+```typescript
+export function useEffectQuery<E, A>(
+  key: ReadonlyArray<string>,
+  effect: Effect.Effect<A, E>,
+) {
+  return useQuery({
+    queryKey: key,
+    queryFn: () => Runtime.runPromise(runtime)(effect),
+  });
+}
+```
+
+### 型安全なAPIクライアント
+- Effect.tsのData.TaggedErrorによるエラー型定義
+- Effect.genによる関数型スタイルの実装
+- tryPromiseによる安全なPromise変換
+
+## Storybook デコレーター設計
+
+### グローバルデコレーター
+- withMSW: MSWの初期化と管理
+- withQueryClient: React Queryクライアントの提供
+- 適切なデコレーター順序の重要性
+
+### ストーリーレベルのハンドラー上書き
+- parameters.mswでの個別ハンドラー指定
+- worker.use()による動的ハンドラー追加
+- resetHandlers()によるクリーンアップ
+
+## 状態テストパターン
+
+### 基本的な状態
+- Default: 標準データ
+- Empty: 空状態
+- Loading: 遅延レスポンス（delay()使用）
+- Error: HTTPエラーレスポンス
+
+### 高度な状態
+- ManyItems: 大量データでのUI確認
+- EdgeCases: 境界値でのテスト
+- NetworkFailure: ネットワークエラーシミュレーション
+
+## 2024年のトレンド
+
+### MSW v2.0 対応
+- http, HttpResponseの新しいAPI
+- より直感的なハンドラー記述
+- TypeScript 5.0+ との互換性向上
+
+### React Query v5 対応
+- 新しいキャッシュシステム
+- 改善されたTypeScript推論  
+- Suspenseとの統合
+
+### Effect.ts エコシステム
+- Schema駆動開発
+- 関数型エラーハンドリング
+- Runtime環境の活用
+
+## 注意点とトラブルシューティング
+
+### パフォーマンス
+- Service Workerの初期化コスト
+- 大量のハンドラー登録時の影響
+- メモリリークの防止（適切なクリーンアップ）
+
+### TypeScript関連
+- Effect.tsの学習コスト
+- 複雑な型推論エラー
+- 適切な型ガードの実装
+
+### デバッグ
+- MSWのログ出力設定
+- ネットワークタブでのリクエスト確認
+- React Query DevToolsとの連携
+
+## 今後の方向性
+
+### 自動化の推進
+- OpenAPIからのハンドラー生成
+- 型定義の自動生成
+- ストーリーテンプレートの自動作成
+
+### テスト統合
+- 同一モックの再利用
+- E2Eテストとの連携
+- ビジュアルリグレッションテスト
+
+### パフォーマンス最適化
+- Code Splittingによる遅延読み込み
+- 必要最小限のハンドラー登録
+- キャッシュ戦略の最適化
